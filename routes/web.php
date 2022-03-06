@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CatatanPerjalananController;
+use App\Models\CatatanPerjalanan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('catatanperjalanan', CatatanPerjalananController::class);
