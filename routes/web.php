@@ -14,9 +14,22 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('customlogin.login');
+});
+Route::get('/registerakun', function () {
+    return view('customlogin.register');
 });
 
+Route::get('/login', function () {
+    return view('customlogin.login');
+});
+// Route::get('login');
+
+Auth::routes();
+
 Route::resource('catatanperjalanan', CatatanPerjalananController::class);
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
