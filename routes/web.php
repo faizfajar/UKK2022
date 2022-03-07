@@ -15,18 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('customlogin.login');
-});
-Route::get('/registerakun', function () {
-    return view('customlogin.register');
-});
-
-Route::get('/login', function () {
-    return view('customlogin.login');
+    return view('auth.login');
 });
 // Route::get('login');
 
 Auth::routes();
+
+// Route::group(]);
 
 Route::resource('catatanperjalanan', CatatanPerjalananController::class);
 
