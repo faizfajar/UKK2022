@@ -18,6 +18,7 @@ class CreateCatatanPerjalanansTable extends Migration
             $table->date('tanggal');
             $table->integer('jam');
             $table->string('lokasi');
+            $table->text('suhu');
             $table->timestamps();
         });
     }

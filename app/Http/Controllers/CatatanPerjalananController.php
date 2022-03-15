@@ -15,9 +15,8 @@ class CatatanPerjalananController extends Controller
      */
     public function index()
     {
-        $data = CatatanPerjalanan::all();
-
-        return view('catatanperjalanan.index' ,compact('data'));
+        $catatan  = CatatanPerjalanan::all();
+        return view ('catatanperjalanan.index',compact('catatan'));
     }
 
     /**
@@ -27,7 +26,7 @@ class CatatanPerjalananController extends Controller
      */
     public function create()
     {
-        //
+        return view('catatanperjalanan.create');
     }
 
     /**
@@ -38,7 +37,15 @@ class CatatanPerjalananController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required',
+            'jam' => 'required',
+            'lokasi' => 'required',
+            'suhu' => 'required',
+        ]);
+        Kategori::create($request->all());
+
+        return redirect()->route('kategori.index')->with('succes','Data Berhasil di Input');
     }
 
     /**
@@ -51,16 +58,15 @@ class CatatanPerjalananController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Kategori $id)
     {
-        //
+        return view('kategori.edit', compact('kategori'));   
     }
 
     /**
@@ -72,17 +78,26 @@ class CatatanPerjalananController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request,$id);
+        $request->validate([
+            'nama_kategori' => 'required',
+            'deskripsi' => 'required',
+        ]);
+        kategori::find($id)->update($request->all());
+
+        return redirect()->route('kategori.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     *
+     * 
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Kategori $id)
     {
-        //
+        $kategori->delete();
+
+        return redirect()->route('kategori.index')->with('succes','Data Berhasil di Hapus');
     }
 }
