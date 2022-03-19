@@ -1,112 +1,81 @@
-@extends('layouts.master')
+@extends('master')
 @section('content')
- <div class="row">
-              <div class="col-lg-12">
-                <div class="card-style mb-30">
-                  <h6 class="mb-10">Data Table</h6>
-                  <p class="text-sm mb-20">
-                    For basic styling—light padding and only horizontal
-                    dividers—use the class table.
-                  </p>
-                  <div class="table-wrapper table-responsive">
-                    <table class="table">
-                      <thead>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-style mb-30">
+            <h6 class="mb-10">Data Table</h6>
+            <div class="table-wrapper table-responsive">
+                <table class="table" id="showresult">
+                    <thead>
                         <tr>
-                          <th><h6>Tanggal</h6></th>
-                          <th><h6>Waktu</h6></th>
-                          <th><h6>Lokasi</h6></th>
-                          <th><h6>Suhu Tubuh</h6></th>
-                          <th><h6>Action</h6></th>
+                            <th><h6>Tanggal</h6></th>
+                            <th><h6>Waktu</h6></th>
+                            <th><h6>Lokasi</h6></th>
+                            <th><h6>Suhu Tubuh</h6></th>
+                            <th><h6>Action</h6></th>
                         </tr>
-                        <!-- end table row-->
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">
-                              <div class="lead-text">
-                                <p>9 Maret 2022</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">06.00</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>Cibinong City Mall</p>
-                          </td>
-                          <td class="min-width">
-                            <p>30 Celcius</p>
-                          </td>
-                          <td>
-                            <div class="action">
-                              <button class="text-danger">
-                                <i class="lni lni-trash-can"></i>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                        <!-- end table row -->
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">
-                              <div class="lead-text">
-                                <p>9 Maret 2022</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">06.00</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>Cibinong City Mall</p>
-                          </td>
-                          <td class="min-width">
-                            <p>30 Celcius</p>
-                          </td>
-                          <td>
-                            <div class="action">
-                              <button class="text-danger">
-                                <i class="lni lni-trash-can"></i>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                        <!-- end table row -->
-                        <tr>
-                          <td class="min-width">
-                            <div class="lead">
-                              <div class="lead-text">
-                                <p>9 Maret 2022</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td class="min-width">
-                            <p><a href="#0">06.00</a></p>
-                          </td>
-                          <td class="min-width">
-                            <p>Cibinong City Mall</p>
-                          </td>
-                          <td class="min-width">
-                            <p>30 Celcius</p>
-                          </td>
-                          <td>
-                            <div class="action">
-                              <button class="text-danger">
-                                <i class="lni lni-trash-can"></i>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                        
-                        <!-- end table row -->
-                      </tbody>
-                    </table>
-                    <!-- end table -->
-                  </div>
-                </div>
-                <!-- end card -->
-              </div>
-              <!-- end col -->
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                <!-- end table -->
             </div>
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
 @endsection
+@section('script')
+    
+
+    <script>
+             $(document).ready(function() {
+                 
+                let table = new DataTable('#showresult')({
+                ajax: "{{ route('catatanperjalanan.index') }}",
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'tanggal', name: 'tanggal'},
+                    {data: 'waktu', name: 'waktu'},
+                    {data: 'lokasi', name: 'lokasi'},
+                    {data: 'suhu', name: 'suhu'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
+
+                $('body').on('click', '.delete-user', function() {
+                    var id = $(this).data("id");
+                    var token = $("meta[name='csrf-token']").attr("content");
+                    confirm("Apakah kamu yakin menghapus ini?");
+
+                    let url = `{{ route('catatanperjalanan.destroy', ':id') }}`;
+                    url = url.replace(':id', id);
+
+                    $.ajax({
+                        method: "DELETE",
+                        url: url,
+                        data: {
+                            "id": id,
+                            "_token": token,
+                        },
+                        success: function(data) {
+                            table.ajax.reload();
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                });
+
+            $('body').on('click', '.edit-user', function() {
+                    var id = $(this).data("id");
+                    let url = `{{ route('catatanperjalanan.edit', ':id') }}`;
+                    url = url.replace(':id', id);
+
+                    window.location = url
+                });
+            });
+        </script>
+    @endsection

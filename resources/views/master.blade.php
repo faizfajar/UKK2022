@@ -5,12 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon"/>
-        <title>Tables | PlainAdmin Demo</title>
+        <title>Peduli Diri</title>
 
         <!-- ========== All CSS files linkup ========= -->
-        <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
-        <link rel="stylesheet" type="text/css" href="assets/DataTables/media/css/jquery.dataTables.css">
-        <link rel="stylesheet" type="text/css" href="assets/DataTables/media/css/dataTables.bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.css')}}">
         <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}"/>
         <link rel="stylesheet" href="{{asset('assets/css/lineicons.css')}}"/>
         <link rel="stylesheet" href="{{asset('assets/css/materialdesignicons.min.css')}}"/>
@@ -109,7 +107,7 @@
         </script> --}}
         
         <!-- ======== main-wrapper end =========== -->
-
+        @yield('script')
         <!-- ========= All Javascript files linkup ======== -->
         <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('assets/js/Chart.min.js')}}"></script>
@@ -120,7 +118,5 @@
         <script src="{{asset('assets/js/world-merc.js')}}"></script>
         <script src="{{asset('assets/js/polyfill.js')}}"></script>
         <script src="{{asset('assets/js/main.js')}}"></script>
-        <script type="text/javascript" src="assets/DataTables/media/js/jquery.js"></script>
-        <script type="text/javascript" src="assets/DataTables/media/js/jquery.dataTables.js"></script>
     </body>
 </html>

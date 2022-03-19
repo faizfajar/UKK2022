@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\CatatanPerjalanan;
-
 use Illuminate\Http\Request;
-
+// use Yajra\DataTables\Facades\DataTables;
+use datatables;
+// use Illuminate\Support\Facades\Auth;
 
 class CatatanPerjalananController extends Controller
 {
@@ -13,10 +14,31 @@ class CatatanPerjalananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $catatan  = CatatanPerjalanan::all();
-        return view ('catatanperjalanan.index',compact('catatan'));
+        $catatan = CatatanPerjalanan::all();
+        // dd($catatan);
+        // dd($request);
+        if ($request->ajax()) {
+            $catatan = CatatanPerjalanan::latest()->get();
+        // dd($catatan);
+            return datatables::of($catatan)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $action = '
+                        <a class="btn btn-success edit-user" id="edit-user" data-toggle="modal" data-id=' . $row->id . '>Edit </a>
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
+                        <a id="delete-user" data-id=' . $row->id . ' class="btn btn-danger delete-user">Delete</a>
+                    ';
+
+                    return $action;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('catatanperjalanan.index');
     }
 
     /**
@@ -37,15 +59,13 @@ class CatatanPerjalananController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'tanggal' => 'required',
-            'jam' => 'required',
-            'lokasi' => 'required',
-            'suhu' => 'required',
-        ]);
-        Kategori::create($request->all());
-
-        return redirect()->route('kategori.index')->with('succes','Data Berhasil di Input');
+        CatatanPerjalanan::create($request->only([
+            'tanggal',
+            'waktu',
+            'lokasi',
+            'suhu',
+        ]));
+        return redirect()->route('catataperjalanan.index');
     }
 
     /**
@@ -58,15 +78,17 @@ class CatatanPerjalananController extends Controller
     {
         //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kategori $id)
+    public function edit($id)
     {
-        return view('kategori.edit', compact('kategori'));   
+        $data = CatatanPerjalanan::find($id);
+        return view('catatanperjalanan.edit', compact('data', 'id'));
     }
 
     /**
@@ -78,26 +100,24 @@ class CatatanPerjalananController extends Controller
      */
     public function update(Request $request, $id)
     {
+        CatatanPerjalanan::find($id)->update($request->all());
         // dd($request,$id);
-        $request->validate([
-            'nama_kategori' => 'required',
-            'deskripsi' => 'required',
-        ]);
-        kategori::find($id)->update($request->all());
-
-        return redirect()->route('kategori.index');
+        //jika data berhasil diupdate, akan kembali ke halaman utama
+        return redirect()->route('catatanperjalanan.index');
     }
 
     /**
      * Remove the specified resource from storage.
-     * 
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $id)
+    public function destroy($id)
     {
-        $kategori->delete();
+        CatatanPerjalanan::find($id)->delete();
 
-        return redirect()->route('kategori.index')->with('succes','Data Berhasil di Hapus');
+        return response()->json([
+            'status' => 'FAIL'
+        ]);
     }
 }
