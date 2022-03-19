@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\CatatanPerjalanan;
 use Illuminate\Http\Request;
-// use Yajra\DataTables\Facades\DataTables;
-use datatables;
+use Yajra\Datatables\Datatables;
+// use Yajra\DataTables\Facades\DataTables
 // use Illuminate\Support\Facades\Auth;
 
 class CatatanPerjalananController extends Controller
@@ -16,13 +16,13 @@ class CatatanPerjalananController extends Controller
      */
     public function index(Request $request)
     {
-        $catatan = CatatanPerjalanan::all();
+        // $catatan = CatatanPerjalanan::all();
         // dd($catatan);
         // dd($request);
         if ($request->ajax()) {
             $catatan = CatatanPerjalanan::latest()->get();
-        // dd($catatan);
-            return datatables::of($catatan)
+        // dd($request,$catatan);
+            return Datatables::of($catatan)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
 

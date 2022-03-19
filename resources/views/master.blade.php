@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="{{asset('assets/css/materialdesignicons.min.css')}}"/>
         <link rel="stylesheet" href="{{asset('assets/css/fullcalendar.css')}}"/>
         <link rel="stylesheet" href="{{asset('assets/css/main.css')}}"/>
+
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     </head>
     <body>
         <!-- ======== sidebar-nav start =========== -->
@@ -105,10 +107,11 @@
                 $('#tableshow').DataTables();
             });
         </script> --}}
-        
+
         <!-- ======== main-wrapper end =========== -->
-        @yield('script')
         <!-- ========= All Javascript files linkup ======== -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
         <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
         <script src="{{asset('assets/js/Chart.min.js')}}"></script>
         <script src="{{asset('assets/js/dynamic-pie-chart.js')}}"></script>
@@ -117,6 +120,10 @@
         <script src="{{asset('assets/js/jvectormap.min.js')}}"></script>
         <script src="{{asset('assets/js/world-merc.js')}}"></script>
         <script src="{{asset('assets/js/polyfill.js')}}"></script>
-        <script src="{{asset('assets/js/main.js')}}"></script>
+        {{-- <script src="{{asset('assets/js/main.js')}}"></script> --}}
+
+
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        @yield('script')
     </body>
 </html>

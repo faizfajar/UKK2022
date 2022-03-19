@@ -8,11 +8,12 @@
                 <table class="table" id="showresult">
                     <thead>
                         <tr>
-                            <th><h6>Tanggal</h6></th>
-                            <th><h6>Waktu</h6></th>
-                            <th><h6>Lokasi</h6></th>
-                            <th><h6>Suhu Tubuh</h6></th>
-                            <th><h6>Action</h6></th>
+                            <td>no</td>
+                            <td>Tanggal</td>
+                            <td>Waktu</td>
+                            <td>Lokasi</td>
+                            <td>Suhu Tubuh</td>
+                            <td>Action</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,22 +29,22 @@
 </div>
 @endsection
 @section('script')
-    
 
-    <script>
-             $(document).ready(function() {
-                 
-                let table = new DataTable('#showresult')({
-                ajax: "{{ route('catatanperjalanan.index') }}",
-                columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'tanggal', name: 'tanggal'},
-                    {data: 'waktu', name: 'waktu'},
-                    {data: 'lokasi', name: 'lokasi'},
-                    {data: 'suhu', name: 'suhu'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ]
-            });
+    <script type="text/javascript">
+             $(document).ready(function () {
+                var table = $('#showresult').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "{{ route('catatanperjalanan.index') }}",
+                    columns: [
+                        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                        {data: 'tanggal', name: 'tanggal'},
+                        {data: 'jam', name: 'jam'},
+                        {data: 'lokasi', name: 'email'},
+                        {data: 'suhu', name: 'suhu'},
+                        {data: 'action', name: 'action', orderable: true,  searchable: true },
+                    ]
+                });
 
                 $('body').on('click', '.delete-user', function() {
                     var id = $(this).data("id");
