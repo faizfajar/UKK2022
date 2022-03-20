@@ -78,39 +78,37 @@
                   <form method="POST" action="{{route('login')}}">
                     @csrf
                     <div class="row">
-                      <div class="col-12">
-                        <div class="input-style-1">
-                          <label>Email</label>
-                          {{-- <input  type="email" placeholder="Email" /> --}}
-                           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                          @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        </div>
-                      </div>
                       <!-- end col -->
                       <div class="col-12">
                         <div class="input-style-1">
-                          <label>Password</label>
-                          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                          <label>Nama Lengkap</label>
+                          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="name">
 
-                                @error('password')
+                                @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                         </div>
                       </div>
-                      <!-- end col -->
-                      <!-- end col -->
-                      <div class="col-12">
+    {{--  --}}
+                        <div class="col-12">
                         <div class="input-style-1">
                           <label>NIK</label>
-                          <input id="nik" type="nik" class="form-control @error('nik') is-invalid @enderror" name="nik" required autocomplete="current-nik">
-
+                          <input id="nik" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" required autocomplete="nik">
                                 @error('nik')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                        </div>
+                      </div>
+                       {{-- --}}
+                       <div class="col-12">
+                        <div class="input-style-1">
+                          <label>Password</label>
+                          <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="password">
+                                @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

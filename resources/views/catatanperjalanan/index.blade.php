@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card-style mb-30">
-            <h6 class="mb-10">Data Table</h6>
+            <h6 class="mb-10 text-light" > <a href="#"  class="btn btn-secondary rounded-3">Input new Data</a></h6>
             <div class="table-wrapper table-responsive">
                 <table class="table" id="showresult">
                     <thead>

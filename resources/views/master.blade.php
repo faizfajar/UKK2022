@@ -38,6 +38,7 @@
                                 <div class="title mb-30">
                                     <h2>Isi Catatan Perjalanan</h2>
                                 </div>
+
                             </div>
                             <!-- end col -->
                             <div class="col-md-6">
@@ -45,7 +46,19 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="#0">Peduli Diri</a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+
+                                        @csrf
+                                    </form>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();" style="margin:-2%; padding:2% " >
+                                    Peduli Diri
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                    </form>
+                                                </a>
                                             </li>
                                             <li class="breadcrumb-item active" aria-current="page">
                                                 Catatan Perjalanan
