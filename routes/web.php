@@ -24,6 +24,7 @@ Auth::routes();
 // Route::group(]);
 
 Route::resource('catatanperjalanan', CatatanPerjalananController::class);
+Route::get('/filtertanggal', [App\Http\Controllers\CatatanPerjalananController::class, 'filter'])->name('filter');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -3,7 +3,28 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card-style mb-30">
-            <h6 class="mb-10 text-light" > <a href="#"  class="btn btn-secondary rounded-3">Input new Data</a></h6>
+            <form action="{{route('filter')}}" method="get">
+                <div class="row g-3 mb-2 align-items-center">
+                    <div class="col-auto">
+                        <label class="col-form-label">Filter Berdasarkan Tanggal</label>
+                    </div>
+                    <div class="row">
+                         <div class="col-auto">
+                        <input type="date" class="form-control" name="dari" required>
+                    </div>
+                    <div class="col-auto">
+                        -
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" class="form-control" name="ke" required>
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-primary" type="submit">Cari</button>
+                    </div>
+                    </div>
+                </div>
+            </form>
+
             <div class="table-wrapper table-responsive">
                 <table class="table" id="showresult">
                     <thead>
@@ -26,6 +47,25 @@
         <!-- end card -->
     </div>
     <!-- end col -->
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 @section('script')

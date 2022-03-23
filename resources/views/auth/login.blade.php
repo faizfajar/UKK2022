@@ -82,7 +82,7 @@
                       <div class="col-12">
                         <div class="input-style-1">
                           <label>Nama Lengkap</label>
-                          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="name">
+                          <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="name" value="{{old('name')}}">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -95,7 +95,7 @@
                         <div class="col-12">
                         <div class="input-style-1">
                           <label>NIK</label>
-                          <input id="nik" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" required autocomplete="nik">
+                          <input id="nik" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" required autocomplete="nik" value="{{old('nik')}}" >
                                 @error('nik')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

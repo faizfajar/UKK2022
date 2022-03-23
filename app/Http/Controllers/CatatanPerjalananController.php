@@ -14,13 +14,18 @@ class CatatanPerjalananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function filter(){
+        $data = CatatanPerjalanan::whereBetween('tanggal', ['dari', 'ke']);
+        return view('catatanperjalanan.index',compact('data'));
+    }
     public function index(Request $request)
     {
         // $catatan = CatatanPerjalanan::all();
         // dd($catatan);
         // dd($request);
         if ($request->ajax()) {
-            $catatan = CatatanPerjalanan::latest()->get();
+            $catatan = CatatanPerjalanan::all();
         // dd($request,$catatan);
             return Datatables::of($catatan)
                 ->addIndexColumn()
