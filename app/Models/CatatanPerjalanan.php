@@ -16,4 +16,5 @@ class CatatanPerjalanan extends Model
     'lokasi',
     'suhu',
     ];
+
 }

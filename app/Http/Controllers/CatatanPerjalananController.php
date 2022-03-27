@@ -16,17 +16,24 @@ class CatatanPerjalananController extends Controller
      */
 
     public function filter(){
-        $data = CatatanPerjalanan::whereBetween('tanggal', ['dari', 'ke']);
         return view('catatanperjalanan.index',compact('data'));
     }
+
     public function index(Request $request)
     {
         // $catatan = CatatanPerjalanan::all();
         // dd($catatan);
         // dd($request);
         if ($request->ajax()) {
-            $catatan = CatatanPerjalanan::all();
-        // dd($request,$catatan);
+            $dari = $request->get('dari');
+            $ke = $request->get('ke');
+
+            if ($dari && $ke) {
+                $catatan = CatatanPerjalanan::whereBetween('tanggal', [$dari, $ke])->get();
+            } else {
+                $catatan = CatatanPerjalanan::all();
+            }
+
             return Datatables::of($catatan)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -64,13 +71,14 @@ class CatatanPerjalananController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         CatatanPerjalanan::create($request->only([
             'tanggal',
-            'waktu',
+            'jam',
             'lokasi',
             'suhu',
         ]));
-        return redirect()->route('catataperjalanan.index');
+        return redirect()->route('catatanperjalanan.index');
     }
 
     /**

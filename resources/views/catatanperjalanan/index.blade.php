@@ -3,27 +3,26 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card-style mb-30">
-            <form action="{{route('filter')}}" method="get">
-                <div class="row g-3 mb-2 align-items-center">
-                    <div class="col-auto">
-                        <label class="col-form-label">Filter Berdasarkan Tanggal</label>
-                    </div>
-                    <div class="row">
-                         <div class="col-auto">
-                        <input type="date" class="form-control" name="dari" required>
-                    </div>
-                    <div class="col-auto">
-                        -
-                    </div>
-                    <div class="col-auto">
-                        <input type="date" class="form-control" name="ke" required>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn btn-primary" type="submit">Cari</button>
-                    </div>
-                    </div>
+            <div class="row g-3 mb-2 align-items-center">
+                <div class="col-auto">
+                    <label class="col-form-label">Filter Berdasarkan Tanggal</label>
+                    <a href="{{route('catatanperjalanan.create')}}">Add new Data</a>
                 </div>
-            </form>
+                <div class="row">
+                        <div class="col-auto">
+                    <input type="date" class="form-control" name="dari" id="dari" required>
+                </div>
+                <div class="col-auto">
+                    -
+                </div>
+                <div class="col-auto">
+                    <input type="date" class="form-control" name="ke" id="ke" required>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit" id="filter" >Cari</button>
+                </div>
+                </div>
+            </div>
 
             <div class="table-wrapper table-responsive">
                 <table class="table" id="showresult">
@@ -71,52 +70,64 @@
 @section('script')
 
     <script type="text/javascript">
-             $(document).ready(function () {
-                var table = $('#showresult').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "{{ route('catatanperjalanan.index') }}",
-                    columns: [
-                        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                        {data: 'tanggal', name: 'tanggal'},
-                        {data: 'jam', name: 'jam'},
-                        {data: 'lokasi', name: 'email'},
-                        {data: 'suhu', name: 'suhu'},
-                        {data: 'action', name: 'action', orderable: true,  searchable: true },
-                    ]
-                });
+        $(document).ready(function () {
+            const table = $('#showresult').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('catatanperjalanan.index') }}",
+                    data: function(d) {
+                        d.dari = $('#dari').val();
+                        d.ke = $('#ke').val();
+                    },
+                },
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'tanggal', name: 'tanggal'},
+                    {data: 'jam', name: 'jam'},
+                    {data: 'lokasi', name: 'email'},
+                    {data: 'suhu', name: 'suhu'},
+                    {data: 'action', name: 'action', orderable: true,  searchable: true },
+                ]
+            });
 
-                $('body').on('click', '.delete-user', function() {
-                    var id = $(this).data("id");
-                    var token = $("meta[name='csrf-token']").attr("content");
-                    confirm("Apakah kamu yakin menghapus ini?");
+            $('body').on('click', '#filter', function() {
+                // table.data.reload();
+                // $('#showresult').data.reload();
+                $('#showresult').DataTable().ajax.reload();
+            });
 
-                    let url = `{{ route('catatanperjalanan.destroy', ':id') }}`;
-                    url = url.replace(':id', id);
+            $('body').on('click', '.delete-user', function() {
+                var id = $(this).data("id");
+                var token = $("meta[name='csrf-token']").attr("content");
+                confirm("Apakah kamu yakin menghapus ini?");
 
-                    $.ajax({
-                        method: "DELETE",
-                        url: url,
-                        data: {
-                            "id": id,
-                            "_token": token,
-                        },
-                        success: function(data) {
-                            table.ajax.reload();
-                        },
-                        error: function(data) {
-                            console.log('Error:', data);
-                        }
-                    });
-                });
+                let url = `{{ route('catatanperjalanan.destroy', ':id') }}`;
+                url = url.replace(':id', id);
 
-            $('body').on('click', '.edit-user', function() {
-                    var id = $(this).data("id");
-                    let url = `{{ route('catatanperjalanan.edit', ':id') }}`;
-                    url = url.replace(':id', id);
-
-                    window.location = url
+                $.ajax({
+                    method: "DELETE",
+                    url: url,
+                    data: {
+                        "id": id,
+                        "_token": token,
+                    },
+                    success: function(data) {
+                        table.ajax.reload();
+                    },
+                    error: function(data) {
+                        console.log('Error:', data);
+                    }
                 });
             });
-        </script>
+
+            $('body').on('click', '.edit-user', function() {
+                var id = $(this).data("id");
+                let url = `{{ route('catatanperjalanan.edit', ':id') }}`;
+                url = url.replace(':id', id);
+
+                window.location = url
+            });
+        });
+    </script>
     @endsection
