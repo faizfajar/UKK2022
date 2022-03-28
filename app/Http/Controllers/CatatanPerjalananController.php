@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 // use Yajra\DataTables\Facades\DataTables
 // use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Storage;
+
 
 class CatatanPerjalananController extends Controller
 {
@@ -22,6 +24,7 @@ class CatatanPerjalananController extends Controller
     public function index(Request $request)
     {
         // $catatan = CatatanPerjalanan::all();
+        // Storage::disk('local')->put('user-created', 'User Yang berhasil Daftar');
         // dd($catatan);
         // dd($request);
         if ($request->ajax()) {

@@ -49,6 +49,7 @@
             <!-- end row -->
           </div>
           <!-- ========== title-wrapper end ========== -->
+          {{-- @include('/storage/app/public/user-created.txt') --}}
 
           <div class="row g-0 auth-row">
             <div class="col-lg-6">
