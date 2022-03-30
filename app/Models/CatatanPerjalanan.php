@@ -15,6 +15,7 @@ class CatatanPerjalanan extends Model
     'jam',
     'lokasi',
     'suhu',
+    'user_id'
     ];
 
 }

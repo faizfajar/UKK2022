@@ -24,11 +24,11 @@
                 </div>
             </div>
 
-            <div class="table-wrapper table-responsive">
+            <div class="table-wrapper">
                 <table class="table" id="showresult">
                     <thead>
                         <tr>
-                            <td>no</td>
+                            <td>No</td>
                             <td>Tanggal</td>
                             <td>Waktu</td>
                             <td>Lokasi</td>

@@ -16,7 +16,7 @@ class CreateCatatanPerjalanansTable extends Migration
         Schema::create('catatan_perjalanans', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->integer('jam');
+            $table->time('jam');
             $table->string('lokasi');
             $table->text('suhu');
             $table->timestamps();

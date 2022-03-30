@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 use App\Models\CatatanPerjalanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 // use Yajra\DataTables\Facades\DataTables
 // use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Storage;
+// use Illuminate\Contracts\Auth\Authenticatable;
+// use Illuminate\Support\Facades\Auth;
+
 
 
 class CatatanPerjalananController extends Controller
@@ -34,9 +38,11 @@ class CatatanPerjalananController extends Controller
             if ($dari && $ke) {
                 $catatan = CatatanPerjalanan::whereBetween('tanggal', [$dari, $ke])->get();
             } else {
-                $catatan = CatatanPerjalanan::all();
-            }
+                // $catatan = CatatanPerjalanan::all();
+                $catatan = Catatanperjalanan::where('user_id',Auth::user()->id)->latest()->get();
 
+            }
+            // dd($catatan);
             return Datatables::of($catatan)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -75,12 +81,15 @@ class CatatanPerjalananController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        CatatanPerjalanan::create($request->only([
+       $data = $request->only([
             'tanggal',
             'jam',
             'lokasi',
             'suhu',
-        ]));
+        ]);
+        $data['user_id'] = Auth::user()->id;
+        // dd($data);
+        CatatanPerjalanan::create($data);
         return redirect()->route('catatanperjalanan.index');
     }
 

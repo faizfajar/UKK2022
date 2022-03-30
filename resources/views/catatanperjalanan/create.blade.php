@@ -10,6 +10,7 @@
             <form action="{{route('catatanperjalanan.store')}}" method="post" class="card">
                 @csrf
                 <!-- Nama Singkat Komli -->
+                 <input type="hidden" id="user_id" name="user_id" value="{{Auth::user()->id}}">
                 <div class="form-group pl-5 pr-5 pt-3">
                     <label for="tanggal">Tanggal</label>
                     <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ old('tanggal', '') }}" placeholder="Tanggal" required>
