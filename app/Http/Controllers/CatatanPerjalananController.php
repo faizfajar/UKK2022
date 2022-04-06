@@ -5,6 +5,8 @@ use App\Models\CatatanPerjalanan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
+use \PDF;
+// use PDF;
 // use Yajra\DataTables\Facades\DataTables
 // use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Storage;
@@ -21,10 +23,40 @@ class CatatanPerjalananController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function history(Request $request){
+        if ($request->ajax()) {
+            $dari = $request->get('dari');
+            $ke = $request->get('ke');
+
+            if ($dari && $ke) {
+                $catatan = CatatanPerjalanan::whereBetween('tanggal', [$dari, $ke])->get();
+            } else {
+                // $catatan = CatatanPerjalanan::all();
+                $catatan = Catatanperjalanan::where('user_id', Auth::user()->id)->latest()->get();
+            }
+            // dd($catatan);
+            return Datatables::of($catatan)
+                ->addIndexColumn()
+                ->addColumn('checkbox', function ($catatan) {
+                    return '<input type="checkbox" id="' . $catatan->id . '" name="pdf_checkbox" class="pdf_checkbox" />';
+                })
+                ->make(true);
+        }
+
+        return view('catatanperjalanan.history');
+    }
+
     public function filter(){
         return view('catatanperjalanan.index',compact('data'));
     }
 
+    public function showPDF()
+    {
+        $data = CatatanPerjalanan::all();
+
+        $pdf = PDF::loadview('catatanperjalanan.showpdf', ['data' => $data]);
+        return $pdf->download('laporan.pdf');
+    }
     public function index(Request $request)
     {
         // $catatan = CatatanPerjalanan::all();
@@ -45,6 +77,9 @@ class CatatanPerjalananController extends Controller
             // dd($catatan);
             return Datatables::of($catatan)
                 ->addIndexColumn()
+                ->addColumn('checkbox', function ($catatan) {
+                    return '<input type="checkbox" id="' . $catatan->id . '" name="pdf_checkbox" class="pdf_checkbox" />';
+                })
                 ->addColumn('action', function ($row) {
 
                     $action = '
@@ -55,7 +90,7 @@ class CatatanPerjalananController extends Controller
 
                     return $action;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['action','checkbox'])
                 ->make(true);
         }
 

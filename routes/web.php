@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CatatanPerjalananController;
+use App\Http\Controllers\HomeController;
 use App\Models\CatatanPerjalanan;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,9 @@ Auth::routes();
 Route::resource('catatanperjalanan', CatatanPerjalananController::class);
 Route::get('/filtertanggal', [App\Http\Controllers\CatatanPerjalananController::class, 'filter'])->name('filter');
 
+// Route::get('dashboard', HomeController::class, 'dashboard' )->name('dashboard');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+Route::get('history', [ App\Http\Controllers\CatatanPerjalananController::class, 'history'])->name('history');
+Route::get('cetakpdf', [App\Http\Controllers\CatatanPerjalananController::class, 'showPDF'])->name('cetakpdf');
 

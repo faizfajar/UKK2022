@@ -36,9 +36,10 @@
                     <div class="title-wrapper pt-30">
                         <div class="row align-items-center">
                             <div class="col-md-6">
-                                <div class="title mb-30">
-                                    <h2>Isi Catatan Perjalanan</h2>
-                                </div>
+                                @yield('title')
+                                    {{-- <div class="title mb-30">
+                                        <h2>Isi Catatan Perjalanan</h2>
+                                    </div> --}}
 
                             </div>
                             <!-- end col -->

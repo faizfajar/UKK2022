@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Tampil List Data Nilai Siswa</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <hr>
+                </div>
+
+            <table border="1" class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <td rowspan="3">No</td>
+                    <td rowspan="3">Nama Siswa</td>
+                    <td rowspan="3">Kelas</td>
+                    <td colspan="10">Penugasan</td>
+                    <td colspan="10">Ulangan Harian</td>
+                </tr>
+                <tr>
+                    <td colspan="8" > Data Kompetensi </td>
+                    <td rowspan="2"> Rata Rata </td>
+                    <td rowspan="2"> Total </td>
+                    <td colspan="8"> Kompetensi Dasar </td>
+                    <td rowspan="2"> Rata Rata </td>
+                    <td rowspan="2"> Total </td>
+                </tr>
+                <tr>
+                    <td>3.1</td>
+                    <td>3.2</td>
+                    <td>3.3</td>
+                    <td>3.4</td>
+                    <td>3.5</td>
+                    <td>3.6</td>
+                    <td>3.7</td>
+                    <td>3.8</td>
+                    <td>4.1</td>
+                    <td>4.2</td>
+                    <td>4.3</td>
+                    <td>4.4</td>
+                    <td>4.5</td>
+                    <td>4.6</td>
+                    <td>4.7</td>
+                    <td>4.8</td>
+                </tr>
+            </thead>
+            @forelse ( $inputnilais as $key => $inputnilai )
+            <tbody>
+                <tr>
+                   <td>{{$key+1}}</td>
+                                <td>{{$inputnilai->siswa->nama_lengkap}}</td>
+                                <td>{{$inputnilai->kategoripenilaian->nama }}</td>
+                                <td>{{$inputnilai->nilai3_1}}</td>
+                                <td>{{$inputnilai->nilai3_2}}</td>
+                                <td>{{$inputnilai->nilai3_3}}</td>
+                                <td>{{$inputnilai->nilai3_4}}</td>
+                                <td>{{$inputnilai->nilai3_5}}</td>
+                                <td>{{$inputnilai->nilai3_6}}</td>
+                                <td>{{$inputnilai->nilai3_7}}</td>
+                                <td>{{$inputnilai->nilai3_8}}</td>
+                                <td>{{$inputnilai->nilai4_1}}</td>
+                                <td>{{$inputnilai->nilai4_2}}</td>
+                                <td>{{$inputnilai->nilai4_4}}</td>
+                                <td>{{$inputnilai->nilai4_4}}</td>
+                                <td>{{$inputnilai->nilai4_5}}</td>
+                                <td>{{$inputnilai->nilai4_6}}</td>
+                                <td>{{$inputnilai->nilai4_7}}</td>
+                                <td>{{$inputnilai->nilai4_8}}</td>
+                                <td>{{$inputnilai->rata_rata}}</td>
+                                <td>{{$inputnilai->total}}</td>
+                </tr>
+            </tbody>
+            @empty
+            @endforelse
+
+        </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

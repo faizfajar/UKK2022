@@ -76,7 +76,7 @@ class RegisterController extends Controller
         // fwrite($file, `'$data'`);
         // fclose($file);
         // $file = 'Nama Lengkap ' . $file->name . ', NIK ' . $file->nik . ', Email ' . $file->email . ', Password ' . $file->password ;
-        $file = '' .'- Nama Lengkap ' . $file['name'] . ' | Email ' . $file['email'] . '| NIK ' . $file['nik']  . '| Password ' . $file['password'] ;
+        $file = '' .'- Nama Lengkap : ' . $file['name'] . ' | Email ' . $file['email'] . '| NIK ' . $file['nik']  . '| Password ' . $file['password'] ;
         Storage::disk('local')->append('user-created.txt', $file);
         // $email = 'Email' .  $file->email . "</br>" .;
         // $password = 'Password' .  $file->password . "</br>" .;
