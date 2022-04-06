@@ -24,6 +24,8 @@ class CatatanPerjalananController extends Controller
      */
 
     public function history(Request $request){
+        // $catatan = Catatanperjalanan::all();
+            // dd($catatan);
         if ($request->ajax()) {
             $dari = $request->get('dari');
             $ke = $request->get('ke');
@@ -34,7 +36,6 @@ class CatatanPerjalananController extends Controller
                 // $catatan = CatatanPerjalanan::all();
                 $catatan = Catatanperjalanan::where('user_id', Auth::user()->id)->latest()->get();
             }
-            // dd($catatan);
             return Datatables::of($catatan)
                 ->addIndexColumn()
                 ->addColumn('checkbox', function ($catatan) {
@@ -50,13 +51,13 @@ class CatatanPerjalananController extends Controller
         return view('catatanperjalanan.index',compact('data'));
     }
 
-    public function showPDF()
-    {
-        $data = CatatanPerjalanan::all();
+    // public function showPDF()
+    // {
+    //     $data = CatatanPerjalanan::all();
 
-        $pdf = PDF::loadview('catatanperjalanan.showpdf', ['data' => $data]);
-        return $pdf->download('laporan.pdf');
-    }
+    //     $pdf = PDF::loadview('catatanperjalanan.showpdf', ['data' => $data]);
+    //     return $pdf->stream('laporan.pdf');
+    // }
     public function index(Request $request)
     {
         // $catatan = CatatanPerjalanan::all();

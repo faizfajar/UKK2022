@@ -2,7 +2,7 @@
 @section('title')
 <div class="title mb-30">
     <h3>History Catatan Perjalanan</h3>
-    
+
 </div>
 @endsection
 @section('content')
@@ -12,7 +12,7 @@
             <div class="row g-3 mb-2 align-items-center">
                 <div>
                     <label class="col-form-label text-bold">Filter Berdasarkan Tanggal</label>
-                    <a href="{{route('cetakpdf')}}">Cetak PDF</a>
+                    <a href="{{url('cetakpdf')}}" id="cetakpdf" >Cetak PDF</a>
                 </div>
                 <div class="row">
                         <div class="col-auto">
@@ -122,43 +122,43 @@
     <script>
 
         let data = [];
-        $(document).on('click', '.pdf_checkbox', function() {
-        if ($(this).is("pdf_checkbox:checked")) {
-            data.push(
-                $(this).attr('id')
-            )
-        } else {
-            let index = data.indexOf($(this).attr('id'));
-            data.splice(index, 1);
-        }
+    //     $(document).on('click', '.pdf_checkbox', function() {
+    //     if ($(this).is(":checked")) {
+    //         data.push(
+    //             $(this).attr('id')
+    //         )
+    //     } else {
+    //         let index = data.indexOf($(this).attr('id'));
+    //         data.splice(index, 1);
+    //     }
 
-        console.log(data);  
+    //     console.log(data);
+    // });
+
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#cetakpdf').on('click', function(e) {
+            e.preventDefault();
+            $(".pdf_checkbox:checked").each(function() {
+                data.push($(this).attr('id'));
+            });
+
+            // console.log(data);
+            if (data.length <= 0) {
+                alert("Please select records.");
+            } else {
+                let selected_values = data.join(',');
+                let url = $(this).attr('href');
+                window.location.href = url + `?cetakpdf=${selected_values}&download=true`;
+            }
+
+        });
+
     });
-    
-//     $(document).ready(function() {
-//         $.ajaxSetup({
-//             headers: {
-//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//             }
-//         });
-//         $('#exportbarcode').on('click', function(e) {
-//             e.preventDefault();
-//             $(".pdf_checkbox:checked").each(function() {
-//                 data.push($(this).attr('id'));
-//             });
-
-//             // console.log(data);
-//             if (data.length <= 0) {
-//                 alert("Please select records.");
-//             } else {
-//                 let selected_values = data.join(',');
-//                 let url = $(this).attr('href');
-//                 window.location.href = url + `?product_id=${selected_values}&download=true`;
-//             }
-            
-//         });
-
-//     });
 
 // </script>
     @endsection

@@ -2,7 +2,7 @@
 @section('title')
 <div class="title mb-30">
     <h3>Add Data</h3>
-    
+
 </div>
 @endsection
 @section('content')
@@ -18,7 +18,6 @@
                 <table class="table" id="showresult">
                     <thead>
                         <tr>
-                            <td></td>
                             <td>No</td>
                             <td>Tanggal</td>
                             <td>Waktu</td>
@@ -73,7 +72,6 @@
                     },
                 },
                 columns: [
-                    {data: 'checkbox', name: 'checkbox' },
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'tanggal', name: 'tanggal'},
                     {data: 'jam', name: 'jam'},

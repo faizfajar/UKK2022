@@ -18,7 +18,7 @@
                 <th>Suhu</th>
             </tr>
         </thead>
-        @forelse ($data as $value)
+        @forelse ($catatan as $value)
         <tbody>
             <tr>
                 <td>{{$loop->iteration}}</td>
@@ -32,6 +32,6 @@
 
         @endforelse
     </table>
-    
+
   </body>
 </html>
