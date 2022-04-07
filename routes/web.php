@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Route::group(]);
+Route::group(['middleware' => ['auth']], function () {
 
 Route::resource('catatanperjalanan', CatatanPerjalananController::class);
 Route::get('/filtertanggal', [App\Http\Controllers\CatatanPerjalananController::class, 'filter'])->name('filter');
@@ -53,5 +53,10 @@ Route::get('cetakpdf', function (Request $request) {
 			//
 			return view('catatanperjalanan.showpdf')->with('catatan', $catatan);
 		});
+
+});
+
+    // Only authenticated users may enter
+
 
 

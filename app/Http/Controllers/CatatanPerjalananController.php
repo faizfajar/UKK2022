@@ -65,6 +65,7 @@ class CatatanPerjalananController extends Controller
         // dd($catatan);
         // dd($request);
         if ($request->ajax()) {
+
             $dari = $request->get('dari');
             $ke = $request->get('ke');
 
@@ -75,11 +76,15 @@ class CatatanPerjalananController extends Controller
                 $catatan = Catatanperjalanan::where('user_id',Auth::user()->id)->latest()->get();
 
             }
+
             // dd($catatan);
             return Datatables::of($catatan)
                 ->addIndexColumn()
                 ->addColumn('checkbox', function ($catatan) {
                     return '<input type="checkbox" id="' . $catatan->id . '" name="pdf_checkbox" class="pdf_checkbox" />';
+                })
+                 ->addColumn('suhu', function ($catatan) {
+                    return $catatan->suhu . '&#8451';
                 })
                 ->addColumn('action', function ($row) {
 
@@ -91,7 +96,7 @@ class CatatanPerjalananController extends Controller
 
                     return $action;
                 })
-                ->rawColumns(['action','checkbox'])
+                ->rawColumns(['action','checkbox','suhu'])
                 ->make(true);
         }
 

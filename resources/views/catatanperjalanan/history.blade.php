@@ -75,7 +75,7 @@
                     {data: 'tanggal', name: 'tanggal'},
                     {data: 'jam', name: 'jam'},
                     {data: 'lokasi', name: 'email'},
-                    {data: 'suhu', name: 'suhu'},
+                    {data: 'suhu', name: 'suhu' },
                     // {data: 'action', name: 'action', orderable: true,  searchable: true },
                 ]
             });

@@ -95,7 +95,7 @@
                         <div class="col-12">
                         <div class="input-style-1">
                           <label>NIK</label>
-                          <input id="nik" type="text" class="form-control @error('nik') is-invalid @enderror" name="nik" required autocomplete="nik" value="{{old('nik')}}" >
+                          <input id="nik" type="number" class="form-control @error('nik') is-invalid @enderror" name="nik" required autocomplete="nik" value="{{old('nik')}}" >
                                 @error('nik')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
