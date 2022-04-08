@@ -70,7 +70,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // dd($data);
-        $file = $data;
+        // $file = $data;
     //    $con Storage::disk('my_disk');
         // $file = fopen('/storage/app/user-created.txt',"User Yang berhasil Daftar");
         // fwrite($file, `'$data'`);
