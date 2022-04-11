@@ -137,6 +137,7 @@ class CatatanPerjalananController extends Controller
         ]);
         $data['user_id'] = Auth::user()->id;
         // dd($data);
+        // dd($data);
         CatatanPerjalanan::create($data);
         return redirect()->route('catatanperjalanan.index');
     }

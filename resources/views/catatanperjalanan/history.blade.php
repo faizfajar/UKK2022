@@ -153,7 +153,7 @@
             } else {
                 let selected_values = data.join(',');
                 let url = $(this).attr('href');
-                window.location.href = url + `?cetakpdf=${selected_values}&download=true`;
+                window.location.href = url + `?cetakpdf=${selected_values}`;
             }
 
         });

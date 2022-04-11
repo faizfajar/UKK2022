@@ -28,12 +28,12 @@ class HomeController extends Controller
     public function index()
     {
         // $data = User::all();
-        $data = User::all();
+        $data = Auth::user();
         // dd($data);
-        
+
         return view('dashboard',compact('data'));
     }
-    
+
     public function register(){
         return view('customlogin\register');
     }
