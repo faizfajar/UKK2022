@@ -19,7 +19,7 @@
                 <!-- NIPD -->
                 <div class="form-group pl-5 pr-5">
                     <label for="jam">Waktu</label>
-                    <input type="time" class="form-control" name="jam" id="jam" value="{{ old('jam', '') }}" placeholder="Waktu Pengisian required>
+                    <input type="time" class="form-control" name="jam" id="jam" value="{{ old('jam', '') }}" placeholder="Waktu Pengisian" required>
                 </div>
 
                 {{-- nama --}}

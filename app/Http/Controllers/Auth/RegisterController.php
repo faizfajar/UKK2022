@@ -70,14 +70,14 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // dd($data);
-        // $file = $data;
+        $file = $data;
     //    $con Storage::disk('my_disk');
         // $file = fopen('/storage/app/user-created.txt',"User Yang berhasil Daftar");
         // fwrite($file, `'$data'`);
         // fclose($file);
         // $file = 'Nama Lengkap ' . $file->name . ', NIK ' . $file->nik . ', Email ' . $file->email . ', Password ' . $file->password ;
-        // $file = '' .'- Nama Lengkap : ' . $file['name'] . ' | Email ' . $file['email'] . '| NIK ' . $file['nik']  . '| Password ' . $file['password'] ;
         // Storage::disk('local')->append('user-created.txt', $file);
+        // $file = '' .'- Nama Lengkap : ' . $file['name'] . ' | Email ' . $file['email'] . '| NIK ' . $file['nik']  . '| Password ' . $file['password'] ;
         // $email = 'Email' .  $file->email . "</br>" .;
         // $password = 'Password' .  $file->password . "</br>" .;
         // Storage::disk('local')->put('file.txt', 'Your content here');

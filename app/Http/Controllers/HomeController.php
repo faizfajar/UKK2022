@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\CatatanPerjalanan;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,8 +28,10 @@ class HomeController extends Controller
     public function index()
     {
         // $data = User::all();
+        $data = User::all();
         // dd($data);
-        return view('dashboard');
+        
+        return view('dashboard',compact('data'));
     }
     
     public function register(){

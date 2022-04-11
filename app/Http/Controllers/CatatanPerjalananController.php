@@ -122,6 +122,13 @@ class CatatanPerjalananController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        $this->validate($request, [
+            'tanggal'     => 'required',
+            'jam'       => 'required',
+            'lokasi'      => 'required|min:10',
+            'suhu'  => 'required|min:2'
+        ]);
+
        $data = $request->only([
             'tanggal',
             'jam',
