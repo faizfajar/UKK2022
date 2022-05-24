@@ -26,7 +26,9 @@
                 </div>
                 <div class="col-auto">
                     <button class="btn btn-primary" type="submit" id="filter" >Cari</button>
-                </div>
+                    <button class="btn btn-primary" type="reset" id="reset">Reset</button>
+                    {{-- <button type="reset">Reset</button> --}}
+                </div> 
                 </div>
             </div>
 
@@ -84,6 +86,10 @@
                 // table.data.reload();
                 // $('#showresult').data.reload();
                 $('#showresult').DataTable().ajax.reload();
+            });
+
+            $('body').on('click', '#reset', function(){
+                window.location.reload();
             });
 
             $('body').on('click', '.delete-user', function() {

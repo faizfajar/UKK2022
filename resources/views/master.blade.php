@@ -55,7 +55,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();" style="margin:-2%; padding:2% " >
-                                    Peduli Diri
+                                    Sign out
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
@@ -63,7 +63,7 @@
                                                 </a>
                                             </li>
                                             <li class="breadcrumb-item active" aria-current="page">
-                                                Catatan Perjalanan
+                                                Peduli Diri
                                             </li>
                                         </ol>
                                     </nav>
